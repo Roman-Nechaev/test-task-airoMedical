@@ -23,7 +23,7 @@ export const Favorites = () => {
   const handleFollowClick = useCallback(() => {
     clearStorage();
   }, [clearStorage]);
-  console.log(favorites);
+
   return (
     <>
       <Container>
