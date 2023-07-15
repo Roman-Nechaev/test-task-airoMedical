@@ -12,6 +12,7 @@ import {
   WrapperBtnFollowing,
 } from './CommonList.styled';
 import { useStore } from '../../store';
+import formattingDescription from '../../utils/formattingDescription';
 
 export const CommonList = item => {
   const { id, name, image_url, description } = item;
@@ -33,7 +34,6 @@ export const CommonList = item => {
   useEffect(() => {
     setIsFollowing(favorites.find(i => i.id === id));
   }, [id, favorites]);
-
   return (
     <>
       <ListItem key={id}>
@@ -45,7 +45,7 @@ export const CommonList = item => {
           <Details>
             <Title>{name}</Title>
 
-            <p>Description: {description}</p>
+            <p>Description: {formattingDescription(description)}</p>
           </Details>
         </LinkSt>
       </ListItem>
