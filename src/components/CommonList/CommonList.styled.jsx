@@ -63,6 +63,8 @@ export const Title = styled.h2`
 `;
 
 export const WrapperBtnFollowing = styled.div`
+  width: 30px;
+  height: 30px;
   position: absolute;
   top: -2px;
   right: 50px;
