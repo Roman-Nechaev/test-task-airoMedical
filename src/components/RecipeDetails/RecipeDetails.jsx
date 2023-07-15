@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useStore } from '../../store';
 import { shallow } from 'zustand/shallow';
+
+import { useStore } from '../../store';
+
+import { FollowingRecipeMarker } from '../FollowingRecipeMarker/FollowingRecipeMarker';
+import { IngredientsTable } from '../IngredientsTable/IngredientsTable';
+
 import {
   DetailImg,
   ImgWrapper,
@@ -14,8 +19,6 @@ import {
   FirstBrewed,
   WrapperMarkerFollowing,
 } from './RecipeDetails.styled';
-
-import { FollowingRecipeMarker } from '../FollowingRecipeMarker/FollowingRecipeMarker';
 
 export const RecipeDetails = () => {
   const { detailsId } = useParams();
@@ -63,6 +66,8 @@ export const RecipeDetails = () => {
             <Tips>
               Brewers Tips: <span>{brewers_tips}</span>
             </Tips>
+
+            <IngredientsTable ingredients={ingredients} />
           </WrapperInfo>
         </>
       )}
