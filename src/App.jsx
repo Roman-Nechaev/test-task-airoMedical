@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Home } from './pages/Home/Home';
-import { Layout } from './components/Layout/Layout';
-
 import { useStore } from './store';
-import { useEffect } from 'react';
+
+import { Layout } from './components/Layout/Layout';
+import { Home } from './pages/Home/Home';
 import { Favorites } from './pages/Favorites/Favorites';
 import { RecipeDetails } from './components/RecipeDetails/RecipeDetails';
 

@@ -1,14 +1,38 @@
-import { CommonList } from '../../components/CommonList/CommonList';
+import { useCallback } from 'react';
+import { shallow } from 'zustand/shallow';
+
 import { useStore } from '../../store';
 
-import { Container, WrapperList, Title } from './Favorites.styled';
+import {
+  Container,
+  WrapperList,
+  Title,
+  DeleteAllBtn,
+} from './Favorites.styled';
+import { CommonList } from '../../components/CommonList/CommonList';
 
 export const Favorites = () => {
-  const { favorites } = useStore(({ favorites }) => ({ favorites }));
+  const { clearStorage, favorites } = useStore(
+    ({ clearStorage, favorites }) => ({
+      clearStorage,
+      favorites,
+    }),
+    shallow
+  );
 
+  const handleFollowClick = useCallback(() => {
+    clearStorage();
+  }, [clearStorage]);
+  console.log(favorites);
   return (
     <>
       <Container>
+        {!!favorites.length && (
+          <DeleteAllBtn type="button" onClick={handleFollowClick}>
+            Delete all favorites
+          </DeleteAllBtn>
+        )}
+
         <>
           {!favorites.length ? (
             <Title>No favorite recipes yet.</Title>

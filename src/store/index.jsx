@@ -56,6 +56,13 @@ export const useStore = create(
           set({ favorites: newFavorites });
         }
       },
+      clearStorage: () => {
+        const { favorites } = get();
+
+        if (favorites) {
+          set({ favorites: [] });
+        }
+      },
     }),
     {
       name: 'recipes-storage',
