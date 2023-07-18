@@ -13,17 +13,26 @@ export const useStore = create(
       recipeId: {},
       loading: false,
       error: null,
-      fetchPopMovie: async () => {
+      hasNextPage: true,
+      currentPage: 1,
+      addPage: () => {
+        set(state => ({ currentPage: state.currentPage + 1 }));
+      },
+      fetchRecipes: async page => {
         set({ loading: true });
+        const { recipesList } = get();
         try {
-          const response = await axios.get('', {
+          const response = await axios.get(``, {
             params: {
-              page: 1,
+              page,
               per_page: 15,
             },
           });
+          const date = response.data;
+          const recipes = [...recipesList, ...date];
+          set({ recipesList: recipes });
 
-          set({ recipesList: response.data });
+          set({ loading: false });
         } catch (e) {
           set({ error: e });
         } finally {
@@ -61,6 +70,21 @@ export const useStore = create(
 
         if (favorites) {
           set({ favorites: [] });
+        }
+      },
+      deleteToCart: item => {
+        const { recipesList } = get();
+        console.log('recipesList', item);
+        const itemFilm = recipesList.find(i => i.id === item.id);
+        console.log('itemFilm', itemFilm);
+        const newFavorites = itemFilm
+          ? recipesList.map(i => (i.id === item.id ? { ...i } : i))
+          : [...recipesList, { ...item }];
+        if (!itemFilm) {
+          set({ recipesList: newFavorites });
+        } else {
+          const newFavorites = get().recipesList.filter(i => i.id !== item.id);
+          set({ recipesList: newFavorites });
         }
       },
     }),

@@ -9,7 +9,7 @@ import {
   Title,
   DeleteAllBtn,
 } from './Favorites.styled';
-import { CommonList } from '../../components/CommonList/CommonList';
+import CommonList from '../../components/CommonList/CommonList';
 
 export const Favorites = () => {
   const { clearStorage, favorites } = useStore(

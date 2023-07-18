@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 
 import { MdOutlineBookmarkBorder, MdOutlineBookmark } from 'react-icons/md';
 
+export const Container = styled.div`
+  :nth-child(5n + 1) {
+    scroll-snap-align: start;
+    background-color: #00619a;
+  }
+`;
+
 export const LinkSt = styled(Link)`
   display: flex;
+
   color: #ffffff;
-  max-width: 650px;
+  min-width: 650px;
   max-height: 100px;
 
   border-radius: 5px;
@@ -24,7 +32,7 @@ export const LinkSt = styled(Link)`
   }
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.div`
   position: relative;
   margin: 10px;
   padding: 5px;
@@ -34,6 +42,7 @@ export const ListItem = styled.li`
   border-radius: 10px;
 
   transition: 0.5s;
+
   :hover,
   :focus {
     background-color: #00619a;

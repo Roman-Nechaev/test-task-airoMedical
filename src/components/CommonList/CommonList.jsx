@@ -1,5 +1,6 @@
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import formattingDescription from '../../utils/formattingDescription';
 import { FollowingRecipeMarker } from '../FollowingRecipeMarker/FollowingRecipeMarker';
@@ -13,43 +14,56 @@ import {
   Details,
   Title,
   WrapperBtnFollowing,
+  Container,
 } from './CommonList.styled';
 
-export const CommonList = item => {
-  const { id, name, image_url, description } = item;
-
+// eslint-disable-next-line react/display-name
+const CommonList = forwardRef((props, ref) => {
+  const { items } = props;
   const location = useLocation();
 
-  const { addToCart } = useStore(({ addToCart }) => ({
-    addToCart,
-  }));
+  const { id, name, image_url, description } = items;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { addToCart, deleteToCart } = useStore(
+    ({ addToCart, deleteToCart }) => ({
+      addToCart,
+      deleteToCart,
+    })
+  );
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const onHandleRightClick = useCallback(
     e => {
       e.preventDefault();
-      addToCart(item);
+      addToCart(items);
+      deleteToCart(items);
     },
-    [addToCart, item]
+    [addToCart, deleteToCart, items]
   );
 
   return (
-    <>
-      <div onContextMenu={onHandleRightClick}>
-        Click My Right Button
-        <ListItem key={id}>
-          <WrapperBtnFollowing>
-            <FollowingRecipeMarker item={item} />
-          </WrapperBtnFollowing>
-          <LinkSt to={`/details/${id}`} state={{ from: location }}>
-            <ItemImg loading="lazy" src={image_url} alt={name} />
-            <Details>
-              <Title>{name}</Title>
+    <Container ref={ref}>
+      <ListItem key={id} onContextMenu={onHandleRightClick}>
+        <WrapperBtnFollowing>
+          <FollowingRecipeMarker item={items} />
+        </WrapperBtnFollowing>
+        <LinkSt to={`/details/${id}`} state={{ from: location }}>
+          <ItemImg loading="lazy" src={image_url} alt={name} />
+          <p>{id}</p>
+          <Details>
+            <Title>{name}</Title>
 
-              <p>Description: {formattingDescription(description)}</p>
-            </Details>
-          </LinkSt>
-        </ListItem>
-      </div>
-    </>
+            <p>Description: {formattingDescription(description)}</p>
+          </Details>
+        </LinkSt>
+      </ListItem>
+    </Container>
   );
+});
+
+export default CommonList;
+
+CommonList.propTypes = {
+  items: PropTypes.object,
 };
