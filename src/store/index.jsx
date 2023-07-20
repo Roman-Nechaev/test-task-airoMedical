@@ -13,19 +13,18 @@ export const useStore = create(
       recipeId: {},
       loading: false,
       error: null,
-      hasNextPage: true,
       currentPage: 1,
       addPage: () => {
         set(state => ({ currentPage: state.currentPage + 1 }));
       },
-      fetchRecipes: async page => {
+      fetchRecipes: async () => {
         set({ loading: true });
-        const { recipesList } = get();
+        const { recipesList, currentPage } = get();
+
         try {
           const response = await axios.get(``, {
             params: {
-              page,
-              per_page: 15,
+              page: currentPage,
             },
           });
           const date = response.data;

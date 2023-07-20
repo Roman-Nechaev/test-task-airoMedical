@@ -26,7 +26,7 @@ export const Favorites = () => {
 
   return (
     <>
-      <Container>
+      <Container hasBeenVisible>
         {!!favorites.length && (
           <DeleteAllBtn type="button" onClick={handleFollowClick}>
             Delete all favorites
@@ -38,9 +38,10 @@ export const Favorites = () => {
             <Title>No favorite recipes yet.</Title>
           ) : (
             <WrapperList>
-              {favorites.map(item => (
-                <CommonList key={item.id} {...item} />
-              ))}
+              {favorites.length &&
+                favorites.map(items => {
+                  return <CommonList key={items.id} ref={null} {...items} />;
+                })}
             </WrapperList>
           )}
         </>

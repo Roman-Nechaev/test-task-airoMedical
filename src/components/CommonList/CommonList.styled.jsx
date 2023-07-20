@@ -6,7 +6,6 @@ import { MdOutlineBookmarkBorder, MdOutlineBookmark } from 'react-icons/md';
 export const Container = styled.div`
   :nth-child(5n + 1) {
     scroll-snap-align: start;
-    background-color: #00619a;
   }
 `;
 
@@ -15,7 +14,7 @@ export const LinkSt = styled(Link)`
 
   color: #ffffff;
   min-width: 650px;
-  max-height: 100px;
+  max-height: 80px;
 
   border-radius: 5px;
 
@@ -55,7 +54,7 @@ export const ItemImg = styled.img`
   min-width: 55px;
 
   height: 100%;
-  height: 141px;
+  height: 125px;
 `;
 
 export const Details = styled.div`

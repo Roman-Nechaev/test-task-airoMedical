@@ -7,14 +7,16 @@ export const Container = styled.div`
 export const WrapperList = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   margin: 0 auto;
+  width: 650px;
 
-  /* justify-content: center; */
-
-  height: 650px;
+  height: 570px;
   overflow: scroll;
   scroll-snap-type: mandatory;
   scroll-snap-points-y: repeat(800px);
   scroll-snap-type: y mandatory;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;

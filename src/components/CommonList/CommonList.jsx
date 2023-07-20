@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -18,8 +18,7 @@ import {
 } from './CommonList.styled';
 
 // eslint-disable-next-line react/display-name
-const CommonList = forwardRef((props, ref) => {
-  const { items } = props;
+const CommonList = items => {
   const location = useLocation();
 
   const { id, name, image_url, description } = items;
@@ -43,7 +42,7 @@ const CommonList = forwardRef((props, ref) => {
   );
 
   return (
-    <Container ref={ref}>
+    <Container>
       <ListItem key={id} onContextMenu={onHandleRightClick}>
         <WrapperBtnFollowing>
           <FollowingRecipeMarker item={items} />
@@ -60,7 +59,7 @@ const CommonList = forwardRef((props, ref) => {
       </ListItem>
     </Container>
   );
-});
+};
 
 export default CommonList;
 
