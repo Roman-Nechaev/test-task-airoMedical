@@ -54,18 +54,14 @@ const Home = () => {
     }
   }, [fetchRecipes, fetching, loading]);
 
-  const topItem = useCallback(
-    node => {
-      if (!node) return;
-      if (loading) return;
+  const topItem = useCallback(node => {
+    if (!node) return;
 
-      if (node.currentTarget.scrollTop === 0) {
-        setFirstVisibleIndex(prevIndex => prevIndex - 5);
-      }
-      return;
-    },
-    [loading]
-  );
+    if (node.currentTarget.scrollTop === 0) {
+      setFirstVisibleIndex(prevIndex => prevIndex - 5);
+    }
+    return;
+  }, []);
 
   const lastItem = useCallback(
     node => {
