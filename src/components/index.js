@@ -4,6 +4,7 @@ import FollowingRecipeMarker from './FollowingRecipeMarker/FollowingRecipeMarker
 import IngredientsTable from './IngredientsTable/IngredientsTable';
 import Layout from './Layout/Layout';
 import RecipeDetails from './RecipeDetails/RecipeDetails';
+import SpinnersLoader from './SpinnersLoader/SpinnersLoader';
 
 export {
   AppBar,
@@ -12,4 +13,5 @@ export {
   IngredientsTable,
   Layout,
   RecipeDetails,
+  SpinnersLoader,
 };

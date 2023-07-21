@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import formattingDescription from '../../utils/formattingDescription';
+import { formattingDescription } from '../../utils';
 import { FollowingRecipeMarker } from '../../components';
 
 import {
@@ -25,7 +25,7 @@ const CommonList = ({ recipe, handleAddToSelected }) => {
         <WrapperBtnFollowing>
           <FollowingRecipeMarker item={recipe} />
         </WrapperBtnFollowing>
-        <LinkSt to={`/details/${id}`} state={{ from: location }}>
+        <LinkSt to={`/recipes/${id}`} state={{ from: location }}>
           <ItemImg loading="lazy" src={image_url} alt={name} />
           <p>{id}</p>
           <Details>

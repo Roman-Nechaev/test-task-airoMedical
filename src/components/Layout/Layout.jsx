@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Background, Container } from './Layout.styled';
-import { AppBar } from '../../components';
+import { AppBar, SpinnersLoader } from '../../components';
 
 const Layout = () => {
   return (
@@ -11,7 +11,7 @@ const Layout = () => {
 
       <main>
         <Container>
-          <Suspense fallback={null}>
+          <Suspense fallback={<SpinnersLoader />}>
             <Outlet />
           </Suspense>
         </Container>

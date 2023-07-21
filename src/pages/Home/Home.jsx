@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
 
-import { CommonList } from '../../components';
+import { CommonList, SpinnersLoader } from '../../components';
+
 import useStore from '../../store';
 
 import { Container, DeleteBtn, WrapperList } from './Home.styled';
+import ErrorPage from '../Error/ErrorPage';
 
 const Home = () => {
   const {
@@ -15,6 +17,7 @@ const Home = () => {
     deleteToCart,
     selectedRecipes,
     updateSelectedRecipes,
+    error,
   } = useStore(
     ({
       fetchRecipes,
@@ -24,6 +27,7 @@ const Home = () => {
       deleteToCart,
       selectedRecipes,
       updateSelectedRecipes,
+      error,
     }) => ({
       recipesList,
       fetchRecipes,
@@ -32,6 +36,7 @@ const Home = () => {
       deleteToCart,
       selectedRecipes,
       updateSelectedRecipes,
+      error,
     }),
     shallow
   );
@@ -53,9 +58,11 @@ const Home = () => {
     node => {
       if (!node) return;
       if (loading) return;
+
       if (node.currentTarget.scrollTop === 0) {
         setFirstVisibleIndex(prevIndex => prevIndex - 5);
       }
+      return;
     },
     [loading]
   );
@@ -112,23 +119,31 @@ const Home = () => {
   const quantitySelected = selectedRecipes.length;
 
   return (
-    <Container>
-      {!!selectedRecipes.length && (
-        <DeleteBtn type="button" onClick={handleFollowClick}>
-          Delete selected items{<sup>{quantitySelected}</sup>}
-        </DeleteBtn>
+    <>
+      {error ? (
+        <ErrorPage />
+      ) : (
+        <Container>
+          {!!selectedRecipes.length && (
+            <DeleteBtn type="button" onClick={handleFollowClick}>
+              Delete selected items{<sup>{quantitySelected}</sup>}
+            </DeleteBtn>
+          )}
+
+          <WrapperList onScroll={topItem}>
+            {visibleRecipes.map(items => (
+              <CommonList
+                key={items.id}
+                recipe={items}
+                handleAddToSelected={handleAddToSelected}
+              />
+            ))}
+            <div ref={lastItem} style={{ height: '20px' }} />
+          </WrapperList>
+          {loading && <SpinnersLoader />}
+        </Container>
       )}
-      <WrapperList onScroll={topItem}>
-        {visibleRecipes.map(items => (
-          <CommonList
-            key={items.id}
-            recipe={items}
-            handleAddToSelected={handleAddToSelected}
-          />
-        ))}
-        <div ref={lastItem} style={{ height: '20px' }} />
-      </WrapperList>
-    </Container>
+    </>
   );
 };
 

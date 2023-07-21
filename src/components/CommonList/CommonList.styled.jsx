@@ -48,8 +48,7 @@ export const ListItem = styled.div`
 `;
 
 export const ItemImg = styled.img`
-  width: 94px;
-  min-width: 55px;
+  width: 95px;
 
   height: 100%;
   height: 125px;
