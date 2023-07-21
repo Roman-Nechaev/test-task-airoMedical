@@ -52,6 +52,7 @@ export const ItemImg = styled.img`
 
   height: 100%;
   height: 125px;
+  margin-top: -50px;
 `;
 
 export const Details = styled.div`
