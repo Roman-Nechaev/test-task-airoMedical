@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import {
   Container,
   Table,
@@ -7,7 +8,7 @@ import {
   Yeast,
 } from './IngredientsTable.styled';
 
-export const IngredientsTable = ({ ingredients }) => {
+const IngredientsTable = ({ ingredients }) => {
   return (
     <Container>
       <Title>Ingredients:</Title>
@@ -62,3 +63,5 @@ export const IngredientsTable = ({ ingredients }) => {
 IngredientsTable.propTypes = {
   ingredients: PropTypes.object,
 };
+
+export default IngredientsTable;

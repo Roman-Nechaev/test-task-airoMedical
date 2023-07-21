@@ -1,32 +1,18 @@
-import { shallow } from 'zustand/shallow';
+import { Header, NavLinks, NavigateList, LogoImg } from './AppBar.styled';
+import logo from '../../assets/hops.png';
+import { Link } from 'react-router-dom';
 
-import { useStore } from '../../store';
-import { Header, NavLinks, NavigateList } from './AppBar.styled';
-
-export const AppBar = () => {
-  const { favorites } = useStore(
-    ({ favorites }) => ({
-      favorites,
-    }),
-    shallow
-  );
-
-  const quantityFavorite = favorites.length;
-
+const AppBar = () => {
   return (
     <Header>
-      <>
-        {/* <Link to="/">
-            <LogoImg src={} alt="Logo" />
-          </Link> */}
-        <NavigateList>
-          <NavLinks to="/">Recipe list</NavLinks>
-
-          <NavLinks to="/favorites">
-            Favorites{!!quantityFavorite && <sup>{quantityFavorite}</sup>}
-          </NavLinks>
-        </NavigateList>
-      </>
+      <Link to="/">
+        <LogoImg src={logo} alt="Logo" />
+      </Link>
+      <NavigateList>
+        <NavLinks to="/">Recipe list</NavLinks>
+      </NavigateList>
     </Header>
   );
 };
+
+export default AppBar;

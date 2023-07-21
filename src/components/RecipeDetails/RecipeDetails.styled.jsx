@@ -89,11 +89,3 @@ export const FirstBrewed = styled.p`
   text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px,
     rgb(0, 0, 0) -1px 0px 1px, rgb(0, 0, 0) 0px -1px 1px;
 `;
-
-export const WrapperMarkerFollowing = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 70px;
-  width: 35px;
-  height: 35px;
-`;

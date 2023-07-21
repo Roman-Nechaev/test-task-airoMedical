@@ -2,10 +2,9 @@ import { useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { shallow } from 'zustand/shallow';
 
-import { useStore } from '../../store';
+import useStore from '../../store';
 
-import { FollowingRecipeMarker } from '../FollowingRecipeMarker/FollowingRecipeMarker';
-import { IngredientsTable } from '../IngredientsTable/IngredientsTable';
+import { IngredientsTable } from '../../components';
 
 import {
   DetailImg,
@@ -17,10 +16,9 @@ import {
   Desc,
   Tips,
   FirstBrewed,
-  WrapperMarkerFollowing,
 } from './RecipeDetails.styled';
 
-export const RecipeDetails = () => {
+const RecipeDetails = () => {
   const { detailsId } = useParams();
   const location = useLocation();
   const beckLinkLocationRef = useRef(location.state?.from ?? '/');
@@ -56,9 +54,6 @@ export const RecipeDetails = () => {
             <DetailImg loading="lazy" src={image_url} alt={name} />
           </ImgWrapper>
           <WrapperInfo>
-            <WrapperMarkerFollowing>
-              <FollowingRecipeMarker item={recipeId} />
-            </WrapperMarkerFollowing>
             <Title>{name}</Title>
             <FirstBrewed>First brewed: {first_brewed}</FirstBrewed>
             <Desc>{description}</Desc>
@@ -74,3 +69,5 @@ export const RecipeDetails = () => {
     </WrapperCards>
   );
 };
+
+export default RecipeDetails;

@@ -1,17 +1,37 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { shallow } from 'zustand/shallow';
 
-import CommonList from '../../components/CommonList/CommonList';
-import { useStore } from '../../store';
-import { Container, WrapperList } from './Home.styled';
+import { CommonList } from '../../components';
+import useStore from '../../store';
 
-export const Home = () => {
-  const { fetchRecipes, recipesList, loading, addPage } = useStore(
-    ({ fetchRecipes, recipesList, loading, addPage }) => ({
+import { Container, DeleteBtn, WrapperList } from './Home.styled';
+
+const Home = () => {
+  const {
+    fetchRecipes,
+    recipesList,
+    loading,
+    addPage,
+    deleteToCart,
+    selectedRecipes,
+    updateSelectedRecipes,
+  } = useStore(
+    ({
+      fetchRecipes,
+      recipesList,
+      loading,
+      addPage,
+      deleteToCart,
+      selectedRecipes,
+      updateSelectedRecipes,
+    }) => ({
       recipesList,
       fetchRecipes,
       loading,
       addPage,
+      deleteToCart,
+      selectedRecipes,
+      updateSelectedRecipes,
     }),
     shallow
   );
@@ -44,9 +64,7 @@ export const Home = () => {
     node => {
       if (!node) return;
       if (loading) return;
-
       if (observer.current) observer.current.disconnect();
-
       observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
           if (!fetching) {
@@ -71,14 +89,47 @@ export const Home = () => {
     setVisibleRecipes(visible);
   }, [recipesList, firstVisibleIndex]);
 
+  const handleFollowClick = useCallback(() => {
+    deleteToCart();
+  }, [deleteToCart]);
+
+  const handleAddToSelected = useCallback(
+    (e, recipe) => {
+      e.preventDefault();
+      if (selectedRecipes.includes(recipe)) {
+        const newSelectedRecipes = selectedRecipes.filter(
+          selectedRecipe => selectedRecipe.id !== recipe.id
+        );
+        updateSelectedRecipes(newSelectedRecipes);
+      } else {
+        const newSelectedRecipes = [...selectedRecipes, recipe];
+        updateSelectedRecipes(newSelectedRecipes);
+      }
+    },
+    [selectedRecipes, updateSelectedRecipes]
+  );
+
+  const quantitySelected = selectedRecipes.length;
+
   return (
     <Container>
+      {!!selectedRecipes.length && (
+        <DeleteBtn type="button" onClick={handleFollowClick}>
+          Delete selected items{<sup>{quantitySelected}</sup>}
+        </DeleteBtn>
+      )}
       <WrapperList onScroll={topItem}>
         {visibleRecipes.map(items => (
-          <CommonList key={items.id} {...items} />
+          <CommonList
+            key={items.id}
+            recipe={items}
+            handleAddToSelected={handleAddToSelected}
+          />
         ))}
         <div ref={lastItem} style={{ height: '20px' }} />
       </WrapperList>
     </Container>
   );
 };
+
+export default Home;

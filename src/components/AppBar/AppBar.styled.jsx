@@ -6,7 +6,7 @@ export const Header = styled.header`
   position: fixed;
   margin: 0 auto;
 
-  padding: 20px 30px;
+  padding: 20px 60px;
 
   justify-content: center;
 
@@ -19,8 +19,10 @@ export const Header = styled.header`
 `;
 
 export const LogoImg = styled.img`
-  width: 175px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 6px;
 `;
 
 export const NavigateList = styled.nav`
@@ -36,7 +38,7 @@ export const NavigateList = styled.nav`
 
 export const NavLinks = styled(NavLink)`
   color: #ffffff;
-  margin-left: 20px;
+
   transition: all 0.5s;
 
   :hover {

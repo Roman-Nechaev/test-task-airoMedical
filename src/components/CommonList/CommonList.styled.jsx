@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { MdOutlineBookmarkBorder, MdOutlineBookmark } from 'react-icons/md';
-
-export const Container = styled.div`
+export const Container = styled.li`
   :nth-child(5n + 1) {
     scroll-snap-align: start;
   }
@@ -76,29 +74,4 @@ export const WrapperBtnFollowing = styled.div`
   position: absolute;
   top: -2px;
   right: 50px;
-`;
-
-export const Bookmark = styled(MdOutlineBookmarkBorder)`
-  color: #ffffff;
-  width: 25px;
-  height: 25px;
-  transition: 0.5s;
-
-  cursor: pointer;
-
-  :hover {
-    color: #3cd95b;
-  }
-`;
-
-export const BookmarkOk = styled(MdOutlineBookmark)`
-  color: #ffffff;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  transition: 0.5s;
-
-  :hover {
-    color: #ff3300;
-  }
 `;

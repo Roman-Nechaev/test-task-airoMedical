@@ -2,9 +2,9 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Background, Container } from './Layout.styled';
-import { AppBar } from '../AppBar/AppBar';
+import { AppBar } from '../../components';
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <Background>
       <AppBar />
@@ -19,3 +19,5 @@ export const Layout = () => {
     </Background>
   );
 };
+
+export default Layout;
